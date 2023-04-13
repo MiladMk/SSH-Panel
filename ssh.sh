@@ -260,8 +260,8 @@ systemctl enable stunnel4
 systemctl restart stunnel4
 systemctl enable squid
 systemctl restart squid
-sudo systemctl enable udpgw
-sudo systemctl restart udpgw
+systemctl enable udpgw
+systemctl restart udpgw
 }
 echo -ne "${GREEN}Installing required packages ............."
 pre_req >/dev/null 2>&1 &
