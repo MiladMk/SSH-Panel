@@ -25,7 +25,7 @@ clear
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[ON]${Font_color_suffix}"
 Error="${Red_font_prefix}[OFF]${Font_color_suffix}"
-cek=$(grep -c -E "^# Autokill" /etc/cron.d/tendang)
+cek=$(grep -c -E "^# Autokill" /etc/cron.d/tendang.sh)
 if [[ "$cek" = "1" ]]; then
 sts="${Info}"
 else
@@ -52,9 +52,9 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/1 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/tendang.sh
+                echo "# Autokill" >>/etc/cron.d/tendang.sh
+                echo "*/1 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -68,9 +68,9 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/5 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/tendang.sh
+                echo "# Autokill" >>/etc/cron.d/tendang.sh
+                echo "*/5 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -84,9 +84,9 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/10 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/tendang.sh
+                echo "# Autokill" >>/etc/cron.d/tendang.sh
+                echo "*/10 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -100,9 +100,9 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/15 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/tendang.sh
+                echo "# Autokill" >>/etc/cron.d/tendang.sh
+                echo "*/15 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -114,7 +114,7 @@ case $AutoKill in
                 ;;
                 4)
                 clear
-                echo > /etc/cron.d/tendang
+                echo > /etc/cron.d/tendang.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
