@@ -192,7 +192,8 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/user-unl
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/usersOnline.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/speedtest-cli
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendang.sh
-wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot_otomatis
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/menu
 
 mv Banner.sh /etc/ssh-panel/Banner.sh
@@ -214,7 +215,11 @@ mv user-unlock.sh /etc/ssh-panel/user-unlock.sh
 mv usersOnline.sh /etc/ssh-panel/usersOnline.sh
 mv speedtest-cli /etc/ssh-panel/speedtest-cli
 mv tendang.sh /etc/ssh-panel/tendang.sh
-mv reboot_otomatis /etc/ssh-panel/reboot_otomatis
+mv tendangcmd.sh /etc/ssh-panel/tendangcmd.sh
+cp /etc/ssh-panel/tendang.sh /etc/cron.d/tendang.sh
+mv reboot.sh /etc/ssh-panel/reboot.sh
+cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
+mv rebootcmd.sh /etc/ssh-panel/rebootcmd.sh
 mv menu /usr/local/bin/menu
 
 chmod +x /etc/ssh-panel/tendang.sh
