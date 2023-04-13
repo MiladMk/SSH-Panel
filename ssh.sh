@@ -123,7 +123,7 @@ cat << EOF > /etc/squid/squid.conf
 acl url1 dstdomain -i 127.0.0.1
 acl url2 dstdomain -i localhost
 acl url3 dstdomain -i $pub_ip
-acl url4 dstdomain -i /REZOTHSSSH?
+acl url4 dstdomain -i /SSHPANEL?
 acl payload url_regex -i "/etc/squid/payload.txt"
 
 http_access allow url1
@@ -134,7 +134,7 @@ http_access allow payload
 http_access deny all
 
 http_port 8080
-visible_hostname REZOTHSSSH
+visible_hostname SSHPANEL
 via off
 forwarded_for off
 pipeline_prefetch off
