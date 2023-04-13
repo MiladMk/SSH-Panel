@@ -1,0 +1,1 @@
+10 4 * * * root /usr/local/bin/reboot_otomatis
