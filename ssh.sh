@@ -190,8 +190,8 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/user-ext
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/user-lock.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/user-unlock.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/usersOnline.sh
-wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/speedtest-cli
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendang.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendangcmd.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/menu
@@ -213,7 +213,6 @@ mv user-extend.sh /etc/ssh-panel/user-extend.sh
 mv user-lock.sh /etc/ssh-panel/user-lock.sh
 mv user-unlock.sh /etc/ssh-panel/user-unlock.sh
 mv usersOnline.sh /etc/ssh-panel/usersOnline.sh
-mv speedtest-cli /etc/ssh-panel/speedtest-cli
 mv tendang.sh /etc/ssh-panel/tendang.sh
 mv tendangcmd.sh /etc/ssh-panel/tendangcmd.sh
 cp /etc/ssh-panel/tendang.sh /etc/cron.d/tendang.sh
@@ -222,28 +221,30 @@ cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
 mv rebootcmd.sh /etc/ssh-panel/rebootcmd.sh
 mv menu /usr/local/bin/menu
 
+chmod +x /etc/ssh-panel/Banner.sh
+chmod +x /etc/ssh-panel/ChangePorts.sh
+chmod +x /etc/ssh-panel/ChangeUser.sh
+chmod +x /etc/ssh-panel/DelUser.sh
+chmod +x /etc/ssh-panel/ListUsers.sh
+chmod +x /etc/ssh-panel/RemoveScript.sh
+chmod +x /etc/ssh-panel/UserManager.sh
+chmod +x /etc/ssh-panel/auto-kill.sh
+chmod +x /etc/ssh-panel/auto-reboot.sh
+chmod +x /etc/ssh-panel/bbr.sh
+chmod +x /etc/ssh-panel/ceklim.sh
+chmod +x /etc/ssh-panel/speedtest-cli
+chmod +x /etc/ssh-panel/user-delete-expired.sh
+chmod +x /etc/ssh-panel/user-extend.sh
+chmod +x /etc/ssh-panel/user-lock.sh
+chmod +x /etc/ssh-panel/user-unlock.sh
+chmod +x /etc/ssh-panel/usersOnline.sh
 chmod +x /etc/ssh-panel/tendang.sh
-chmod +x /etc/cron.d/reboot_otomatis
-chmod +x /etc/cron.d/tendang
+chmod +x /etc/ssh-panel/tendangcmd.sh
+chmod +x /etc/cron.d/tendang.sh
+chmod +x /etc/ssh-panel/reboot.sh
+chmod +x /etc/cron.d/reboot.sh
+chmod +x /etc/ssh-panel/rebootcmd.sh
 chmod +x /usr/local/bin/menu
-chmod +x /usr/local/bin/reboot_otomatis
-chmod +x /etc/rezoth-ssh/auto-kill.sh
-chmod +x /etc/rezoth-ssh/auto-reboot.sh
-chmod +x /etc/rezoth-ssh/Banner.sh
-chmod +x /etc/rezoth-ssh/bbr.sh
-chmod +x /etc/rezoth-ssh/ceklim.sh
-chmod +x /etc/rezoth-ssh/ChangePorts.sh
-chmod +x /etc/rezoth-ssh/ChangeUser.sh
-chmod +x /etc/rezoth-ssh/DelUser.sh
-chmod +x /etc/rezoth-ssh/ListUsers.sh
-chmod +x /etc/rezoth-ssh/RemoveScript.sh
-chmod +x /etc/rezoth-ssh/speedtest-cli
-chmod +x /etc/rezoth-ssh/user-delete-expired.sh
-chmod +x /etc/rezoth-ssh/user-extend.sh
-chmod +x /etc/rezoth-ssh/user-lock.sh
-chmod +x /etc/rezoth-ssh/user-unlock.sh
-chmod +x /etc/rezoth-ssh/UserManager.sh
-chmod +x /etc/rezoth-ssh/usersOnline.sh
 
 }
 fun_service_start()
