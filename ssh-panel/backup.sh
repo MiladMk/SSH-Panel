@@ -22,13 +22,13 @@ cp /etc/group backup/
 cp /etc/shadow backup/
 cp /etc/gshadow backup/
 cd /root
-zip -r $IP-$date.zip backup > /dev/null 2>&1
+zip -r backup.zip backup > /dev/null 2>&1
 
 echo -e "
 Detail Backup 
 ==================================
 IP VPS        : $IP
-Directory     : /root/$IP-$date.zip
+Directory     : /root/backup.zip
 Date          : $date
 ==================================
 "
