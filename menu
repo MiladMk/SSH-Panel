@@ -1,0 +1,87 @@
+#!/bin/bash
+
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+CYAN="\e[36m"
+ENDCOLOR="\e[0m"
+
+pub_ip=$(wget -qO- https://ipecho.net/plain ; echo)
+
+old_db_port=$(grep "DROPBEAR_PORT=" /etc/default/dropbear | sed 's/=/= /'  | awk '{print$2}')
+
+old_db_ssl=$(grep "accept =" /etc/stunnel/stunnel.conf | sed ':a;N;$!ba;s/\n/ /g' | sed 's/accept =//g' | awk '{print$1}')
+
+old_op_ssl=$(grep "accept =" /etc/stunnel/stunnel.conf | sed ':a;N;$!ba;s/\n/ /g' | sed 's/accept =//g' | awk '{print$2}')
+
+old_squid_port=$(sed /^#/d /etc/squid/squid.conf | grep "http_port" | awk '{print$2}')
+
+old_udpgw_port=$(cat /etc/systemd/system/udpgw.service | sed 's/ /\n/g'  | grep "127.0.0.1:" | sed 's/:/ /' | awk '{print$2}')
+
+if ! [ $(id -u) = 0 ]; then
+   echo -e "${RED}Plese run the command with root privilages!${ENDCOLOR}"
+   exit 1
+fi
+
+clear
+echo -e "${YELLOW}************ SSH PANEL ************"
+echo -e "${RED}-----------------------------------\n"
+echo -e "${YELLOW}-------- Server Details -----------\n"
+echo -e "${GREEN}IP : $pub_ip"
+echo -e "Dropbear port : $old_db_port"
+echo -e "Dropbear + SSL port : $old_db_ssl"
+echo -e "Openssh +  SSL port : $old_op_ssl"
+echo -e "Squid port : $old_squid_port"
+echo -e "BadVPN UDP Gateway port : $old_udpgw_port\n"
+echo -e "${RED}-----------------------------------\n"
+echo -e "  ${CYAN}0)Exit"
+echo -e "  1)Add new users"
+echo -e "  2)View All users"
+echo -e "  3)Edit Users(With Password)"
+echo -e "  4)Delete a user"
+echo -e "  5)Change Ports"
+echo -e "  6)Edit SSH Banner"
+echo -e "  7)Server Information"
+echo -e "  8)Server Speedtest"
+echo -e "  9)Remove Script"
+echo -e "  10)Auto Reboot"
+echo -e "  11)Online Users"
+echo -e "  12)Delete Expire Users"
+echo -e "  13)Edit Users(Not Password)"
+echo -e "  14)Lock Users"
+echo -e "  15)Unlock Users"
+echo -e "  16)Auto Kill Dupplicate Users"
+echo -e "  17)Show Useres Dupplicate Login"
+echo -e "  18)Install bbr"
+echo -e "  19)Backup Users"
+echo -e "  20)Restore Users"
+echo -e "  21)Clear log"
+
+echo -ne "${GREEN}\nSelect Operation : ${ENDCOLOR}" ;read n
+
+case $n in
+  0) clear;exit;;
+  1) /etc/ssh-panel/UserManager.sh;;
+  2) /etc/ssh-panel/ListUsers.sh;;
+  3) /etc/ssh-panel/ChangeUser.sh;;
+  4) /etc/ssh-panel/DelUser.sh;;
+  5) /etc/ssh-panel/ChangePorts.sh;;
+  6) /etc/ssh-panel/Banner.sh;;
+  7) clear && screenfetch -p || echo -e "${RED}Screenfetch not installed. please install${ENDCOLOR}"; echo -e "\nPress Enter to return back to the menu";read;menu;;  
+  8) clear && python3 /etc/ssh-panel/speedtest-cli || echo -e "${RED}Python3 or speedtest-cli not installed. please install${ENDCOLOR}"; echo -e "\nPress Enter to return back to the menu";read;menu;;
+  9) /etc/ssh-panel/RemoveScript.sh;;
+  10) /etc/ssh-panel/auto-reboot.sh;;
+  11) /etc/ssh-panel/usersOnline.sh;;
+  12) /etc/ssh-panel/user-delete-expired.sh;;
+  13) /etc/ssh-panel/user-extend.sh;;
+  14) /etc/ssh-panel/user-lock.sh;;
+  15) /etc/ssh-panel/user-unlock.sh;;
+  16) /etc/ssh-panel/auto-kill.sh;;
+  17) /etc/ssh-panel/ceklim.sh;;
+  18) /etc/ssh-panel/bbr.sh;;
+  19) /etc/ssh-panel/backup.sh;;
+  20) /etc/ssh-panel/restore.sh;;
+  21) /etc/ssh-panel/clearlog.sh;;
+  *) echo -e "${RED}\nInvalid Option. Press Enter to return back to the menu${ENDCOLOR}";read && menu;;
+esac
