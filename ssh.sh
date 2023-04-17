@@ -194,6 +194,9 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendang.
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendangcmd.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/backup.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/clearlog.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/restore.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/menu
 
 mv Banner.sh /etc/ssh-panel/Banner.sh
@@ -219,6 +222,9 @@ cp /etc/ssh-panel/tendang.sh /etc/cron.d/tendang.sh
 mv reboot.sh /etc/ssh-panel/reboot.sh
 cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
 mv rebootcmd.sh /etc/ssh-panel/rebootcmd.sh
+mv backup.sh /etc/ssh-panel/backup.sh
+mv clearlog.sh /etc/ssh-panel/clearlog.sh
+mv restore.sh /etc/ssh-panel/restore.sh
 mv menu /usr/local/bin/menu
 
 chmod +x /etc/ssh-panel/Banner.sh
@@ -244,6 +250,9 @@ chmod +x /etc/cron.d/tendang.sh
 chmod +x /etc/ssh-panel/reboot.sh
 chmod +x /etc/cron.d/reboot.sh
 chmod +x /etc/ssh-panel/rebootcmd.sh
+chmod +x /etc/ssh-panel/backup.sh
+chmod +x /etc/ssh-panel/clearlog.sh
+chmod +x /etc/ssh-panel/restore.sh
 chmod +x /usr/local/bin/menu
 
 }
