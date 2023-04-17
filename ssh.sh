@@ -150,6 +150,7 @@ fun_udpgw()
 {
 #build and install badvpn-udpgw
 
+apt install git -y
 git clone https://github.com/ambrop72/badvpn
 cd badvpn
 cmake -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
