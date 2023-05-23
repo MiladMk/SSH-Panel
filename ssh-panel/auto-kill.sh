@@ -52,9 +52,9 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang.sh
-                echo "# Autokill" >>/etc/cron.d/tendang.sh
-                echo "*/1 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
+                echo > /etc/cron.d/tendangcmd.sh
+                echo "# Autokill" >>/etc/cron.d/tendangcmd.sh
+                echo "*/1 * * * *  root /etc/ssh-panel/tendangcmd.sh $max" >>/etc/cron.d/tendangcmd.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -68,9 +68,9 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang.sh
-                echo "# Autokill" >>/etc/cron.d/tendang.sh
-                echo "*/5 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
+                echo > /etc/cron.d/tendangcmd.sh
+                echo "# Autokill" >>/etc/cron.d/tendangcmd.sh
+                echo "*/5 * * * *  root /etc/ssh-panel/tendangcmd.sh $max" >>/etc/cron.d/tendangcmd.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -84,8 +84,8 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang.sh
-                echo "# Autokill" >>/etc/cron.d/tendang.sh
+                echo > /etc/cron.d/tendangcmd.sh
+                echo "# Autokill" >>/etc/cron.d/tendangcmd.sh
                 echo "*/10 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
                 echo -e ""
                 echo -e "======================================"
@@ -102,7 +102,7 @@ case $AutoKill in
                 clear
                 echo > /etc/cron.d/tendang.sh
                 echo "# Autokill" >>/etc/cron.d/tendang.sh
-                echo "*/15 * * * *  root /etc/ssh-panel/tendang.sh $max" >>/etc/cron.d/tendang.sh
+                echo "*/15 * * * *  root /etc/ssh-panel/tendangcmd.sh $max" >>/etc/cron.d/tendangcmd.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
@@ -114,7 +114,7 @@ case $AutoKill in
                 ;;
                 4)
                 clear
-                echo > /etc/cron.d/tendang.sh
+                echo > /etc/cron.d/tendangcmd.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
