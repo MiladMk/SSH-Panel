@@ -6,7 +6,7 @@ echo '#!/bin/bash' > /etc/ssh-panel/reboot.sh
 echo 'tanggal=$(date +"%m-%d-%Y")' >> /etc/ssh-panel/reboot.sh
 echo 'waktu=$(date +"%T")' >> /etc/ssh-panel/reboot.sh 
 echo 'echo "Server successfully rebooted on the date of $tanggal hit $waktu." >> /root/log-reboot.txt' >> /etc/ssh-panel/reboot.sh
-echo '/sbin/shutdown -r now' >> /etc/ssh-panel/reboo.sh
+echo '/sbin/shutdown -r now' >> /etc/ssh-panel/reboot.sh
 chmod +x /etc/ssh-panel/reboot.sh
 chmod +x /etc/ssh-panel/rebootcmd.sh
 fi
