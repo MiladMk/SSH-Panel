@@ -18,14 +18,14 @@ echo "You can check it on your email if you run backup data vps before."
 read -rp "Link File: " -e url
 wget -O backup.zip "$url"
 unzip backup.zip
-rm -f backup.zip
+
 sleep 1
 echo Start Restore
 cd /root/backup
-cp passwd /etc/
-cp group /etc/
-cp shadow /etc/
-cp gshadow /etc/
+cp /root/backup/passwd /etc/
+cp /root/backup/group /etc/
+cp /root/backup/shadow /etc/
+cp /root/backup/gshadow /etc/
 
 echo Restore Done
 echo -e "\nPress Enter key to return to main menu"; read
