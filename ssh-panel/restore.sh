@@ -19,7 +19,7 @@ read -rp "Link File: " -e url
 wget -O backup.zip "$url"
 unzip backup.zip
 
-sleep 1
+sleep 10
 echo Start Restore
 cd /root/backup
 cp /root/backup/passwd /etc/
