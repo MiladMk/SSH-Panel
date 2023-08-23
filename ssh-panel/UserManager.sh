@@ -28,7 +28,7 @@ echo -e "${RED}-----------" &&
 echo -e "${GREEN}\nUsername :${YELLOW} $username" &&
 echo -e "${GREEN}\nPassword :${YELLOW} $password" &&
 echo -e "${GREEN}\nExpire Date :${YELLOW} $exd ${ENDCOLOR}" &&
-echo -e "${YELLOW}\nssh://$username:$password@mc3.ileopro.online:8088${ENDCOLOR}" ||
+echo -e "${YELLOW}\nssh://$username:$password@ipaddress:8088${ENDCOLOR}" ||
 echo -e "${RED}\nFailed to add user $username please try again.${ENDCOLOR}"
 
 #return to panel
