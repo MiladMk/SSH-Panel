@@ -84,5 +84,6 @@ case $n in
   19) /etc/ssh-panel/backup.sh;;
   20) /etc/ssh-panel/restore.sh;;
   21) /etc/ssh-panel/clearlog.sh;;
+  22) /etc/ssh-panel/auto-kill-lock.sh;;
   *) echo -e "${RED}\nInvalid Option. Press Enter to return back to the menu${ENDCOLOR}";read && menu;;
 esac
