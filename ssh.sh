@@ -181,6 +181,7 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/ListUser
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/RemoveScript.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/UserManager.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-kill.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-kill-lock.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/bbr.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/ceklim.sh
@@ -208,6 +209,7 @@ mv ListUsers.sh /etc/ssh-panel/ListUsers.sh
 mv RemoveScript.sh /etc/ssh-panel/RemoveScript.sh
 mv UserManager.sh /etc/ssh-panel/UserManager.sh
 mv auto-kill.sh /etc/ssh-panel/auto-kill.sh
+mv auto-kill-lock.sh /etc/ssh-panel/auto-kill-lock.sh
 mv auto-reboot.sh /etc/ssh-panel/auto-reboot.sh
 mv bbr.sh /etc/ssh-panel/bbr.sh
 mv ceklim.sh /etc/ssh-panel/ceklim.sh
@@ -236,6 +238,7 @@ chmod +x /etc/ssh-panel/ListUsers.sh
 chmod +x /etc/ssh-panel/RemoveScript.sh
 chmod +x /etc/ssh-panel/UserManager.sh
 chmod +x /etc/ssh-panel/auto-kill.sh
+chmod +x /etc/ssh-panel/auto-kill-lock.sh
 chmod +x /etc/ssh-panel/auto-reboot.sh
 chmod +x /etc/ssh-panel/bbr.sh
 chmod +x /etc/ssh-panel/ceklim.sh
