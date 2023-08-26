@@ -57,6 +57,7 @@ echo -e "  18)Install bbr"
 echo -e "  19)Backup Users"
 echo -e "  20)Restore Users"
 echo -e "  21)Clear log"
+echo -e "  22)Auto Kill And Lock Dupplicate Users"
 
 echo -ne "${GREEN}\nSelect Operation : ${ENDCOLOR}" ;read n
 
