@@ -191,6 +191,7 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/user-loc
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/user-unlock.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/usersOnline.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendang
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendangandlock
 
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
@@ -217,6 +218,7 @@ mv user-lock.sh /etc/ssh-panel/user-lock.sh
 mv user-unlock.sh /etc/ssh-panel/user-unlock.sh
 mv usersOnline.sh /etc/ssh-panel/usersOnline.sh
 mv tendang /usr/bin/tendang
+mv tendangandlock /usr/bin/tendangandlock
 
 mv reboot.sh /etc/ssh-panel/reboot.sh
 cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
@@ -245,6 +247,7 @@ chmod +x /etc/ssh-panel/user-unlock.sh
 chmod +x /etc/ssh-panel/usersOnline.sh
 
 chmod +x /usr/bin/tendang
+chmod +x /usr/bin/tendangandlock
 chmod +x /etc/ssh-panel/reboot.sh
 chmod +x /etc/cron.d/reboot.sh
 chmod +x /etc/ssh-panel/rebootcmd.sh
