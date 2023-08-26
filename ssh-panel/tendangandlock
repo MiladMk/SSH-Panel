@@ -81,6 +81,7 @@ fi
                         echo "$date - ${username[$i]} - ${jumlah[$i]}";
                         echo "$date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
                         kill ${pid[$i]};
+			passwd -l ${username[$i]};
                         pid[$i]="";
                         j=`expr $j + 1`;
                 fi
