@@ -58,6 +58,7 @@ echo -e "  19)Backup Users"
 echo -e "  20)Restore Users"
 echo -e "  21)Clear log"
 echo -e "  22)Auto Kill And Lock Dupplicate Users"
+echo -e "  23)Auto Unlock Blocked Users"
 
 echo -ne "${GREEN}\nSelect Operation : ${ENDCOLOR}" ;read n
 
@@ -85,5 +86,6 @@ case $n in
   20) /etc/ssh-panel/restore.sh;;
   21) /etc/ssh-panel/clearlog.sh;;
   22) /etc/ssh-panel/auto-kill-lock.sh;;
+  23) /etc/ssh-panel/auto-unlock.sh;;
   *) echo -e "${RED}\nInvalid Option. Press Enter to return back to the menu${ENDCOLOR}";read && menu;;
 esac
