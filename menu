@@ -88,6 +88,6 @@ case $n in
   21) /etc/ssh-panel/clearlog.sh;;
   22) /etc/ssh-panel/auto-kill-lock.sh;;
   23) /etc/ssh-panel/auto-unlock.sh;;
-  25) /etc/ssh-panel/show-expire-users.sh;; 
+  24) /etc/ssh-panel/show-expire-users.sh;;
   *) echo -e "${RED}\nInvalid Option. Press Enter to return back to the menu${ENDCOLOR}";read && menu;;
 esac
