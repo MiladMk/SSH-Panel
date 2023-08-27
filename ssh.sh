@@ -195,6 +195,7 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendang
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendangandlock
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/unlock-blocked-users.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-unlock.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/show-expire-users.sh
 
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
@@ -225,6 +226,7 @@ mv tendang /usr/bin/tendang
 mv tendangandlock /usr/bin/tendangandlock
 mv unlock-blocked-users.sh /usr/bin/unlock-blocked-users.sh
 mv auto-unlock.sh /etc/ssh-panel/auto-unlock.sh
+mv show-expire-users.sh /etc/ssh-panel/show-expire-users.sh
 
 mv reboot.sh /etc/ssh-panel/reboot.sh
 cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
@@ -253,6 +255,7 @@ chmod +x /etc/ssh-panel/user-lock.sh
 chmod +x /etc/ssh-panel/user-unlock.sh
 chmod +x /etc/ssh-panel/usersOnline.sh
 chmod +x /etc/ssh-panel/auto-unlock.sh
+chmod +x /etc/ssh-panel/show-expire-users.sh
 
 chmod +x /usr/bin/tendang
 chmod +x /usr/bin/tendangandlock
