@@ -78,8 +78,9 @@ fi
 			do
                 if [ ${jumlah[$i]} -gt $MAX ]; then
                         date=`date +"%Y-%m-%d %X"`;
-                        echo "$date - ${username[$i]} - ${jumlah[$i]}";
-                        echo "$date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
+                        #echo "$date - ${username[$i]} - ${jumlah[$i]}";
+			echo "Block User ${username[$i]} - $date - Connection: ${jumlah[$i]}";
+                        echo "Block User ${username[$i]} - $date - Connection: ${jumlah[$i]}" >> /root/log-lock-limit.txt;
                         kill ${pid[$i]};
 			passwd -l ${username[$i]};
                         pid[$i]="";
