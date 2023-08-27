@@ -228,7 +228,7 @@ mv tendangandlock /usr/bin/tendangandlock
 mv unlock-blocked-users.sh /usr/bin/unlock-blocked-users.sh
 mv auto-unlock.sh /etc/ssh-panel/auto-unlock.sh
 mv show-expire-users.sh /etc/ssh-panel/show-expire-users.sh
-mv show-expire-users.sh /etc/ssh-panel/lock-expire-users.sh
+mv lock-expire-users.sh /etc/ssh-panel/lock-expire-users.sh
 
 mv reboot.sh /etc/ssh-panel/reboot.sh
 cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
