@@ -258,6 +258,7 @@ chmod 700 /etc/ssh-panel/user-unlock.sh
 chmod 700 /etc/ssh-panel/usersOnline.sh
 chmod 700 /etc/ssh-panel/auto-unlock.sh
 chmod 700 /etc/ssh-panel/show-expire-users.sh
+chmod 700 /etc/ssh-panel/lock-expire-users.sh
 
 chmod 700 /usr/bin/tendang
 chmod 700 /usr/bin/tendangandlock
