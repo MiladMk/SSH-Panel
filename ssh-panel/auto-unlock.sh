@@ -9,25 +9,11 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-# Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-IZIN=$( curl https://raw.githubusercontent.com/senowahyu62/perizinan/main/ipvps.txt | grep $MYIP )
-if [ $MYIP = $MYIP ]; then
-echo -e "${NC}${GREEN}Permission Accepted...${NC}"
-else
-echo -e "${NC}${RED}Permission Denied!${NC}";
-echo -e "${NC}${LIGHT}Please Contact Admin!!"
-echo -e "${NC}${LIGHT}Facebook : https://m.facebook.com/lis.tio.718"
-echo -e "${NC}${LIGHT}WhatsApp : 081545854516"
-echo -e "${NC}${LIGHT}Telegram : https://t.me/Akbar218"
-exit 0
-fi
 clear
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[ON]${Font_color_suffix}"
 Error="${Red_font_prefix}[OFF]${Font_color_suffix}"
-cek=$(grep -c -E "^# Autokill" /etc/cron.d/tendang)
+cek=$(grep -c -E "^# AutoUnlock" /etc/cron.d/unlock-blocked-users)
 if [[ "$cek" = "1" ]]; then
 sts="${Info}"
 else
@@ -36,32 +22,30 @@ fi
 clear
 echo -e ""
 echo -e "=================================="
-echo -e "       Status Autokill $sts       "
+echo -e "       Status Auto Unlock Blocked Users $sts       "
 echo -e "=================================="
-echo -e "0. AutoKill After 1 Minutes"
-echo -e "1. AutoKill After 5 Minutes"
-echo -e "2. AutoKill After 10 Minutes"
-echo -e "3. AutoKill After 15 Minutes"
-echo -e "4. Turn Off AutoKill/MultiLogin"
+echo -e "0. AutoUnlock After 1 Minutes"
+echo -e "1. AutoUnlock After 5 Minutes"
+echo -e "2. AutoUnlock After 10 Minutes"
+echo -e "3. AutoUnlock After 15 Minutes"
+echo -e "4. Turn Off AutoUnlock"
 echo -e "5. Exit"
 echo -e "=================================="                                                                                                          
 echo -e ""
-read -p "Select From Options [1-4 or x] :  " AutoKill
-read -p "Multilogin Maximum Number Of Allowed: " max
+read -p "Select From Options [1-4 or x] :  " AutoUnlock
 echo -e ""
-case $AutoKill in
+case $AutoUnlock in
                 0)
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/1 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/unlock-blocked-users
+                echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
+                echo "*/1 * * * *  root /usr/bin/unlock-blocked-users.sh" >>/etc/cron.d/unlock-blocked-users
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      Allowed MultiLogin : $max"
-                echo -e "      AutoKill Every     : 1 Minutes"      
+                echo -e "      AutoUnlock Every     : 1 Minutes"      
                 echo -e ""
                 echo -e "======================================"                                                                                                                                 
                 exit                                                                  
@@ -70,14 +54,13 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/5 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/unlock-blocked-users
+                echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
+                echo "*/5 * * * *  root /usr/bin/unlock-blocked-users.sh" >>/etc/cron.d/unlock-blocked-users
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      Allowed MultiLogin : $max"
-                echo -e "      AutoKill Every     : 5 Minutes"      
+                echo -e "      AutoUnlock Every     : 5 Minutes"      
                 echo -e ""
                 echo -e "======================================"                                                                                                                                 
                 exit                                                                  
@@ -86,14 +69,13 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/10 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/unlock-blocked-users
+                echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
+                echo "*/10 * * * *  root /usr/bin/unlock-blocked-users.sh" >>/etc/cron.d/unlock-blocked-users
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      Allowed MultiLogin : $max"
-                echo -e "      AutoKill Every     : 10 Minutes"
+                echo -e "      AutoUnlock Every     : 10 Minutes"
                 echo -e ""
                 echo -e "======================================"
                 exit
@@ -102,25 +84,24 @@ case $AutoKill in
                 echo -e ""
                 sleep 1
                 clear
-                echo > /etc/cron.d/tendang
-                echo "# Autokill" >>/etc/cron.d/tendang
-                echo "*/15 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+                echo > /etc/cron.d/unlock-blocked-users
+                echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
+                echo "*/15 * * * *  root /usr/bin/unlock-blocked-users" >>/etc/cron.d/unlock-blocked-users
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      Allowed MultiLogin : $max"
-                echo -e "      AutoKill Every     : 15 Minutes"
+                echo -e "      AutoUnlock Every     : 15 Minutes"
                 echo -e ""
                 echo -e "======================================"
                 exit
                 ;;
                 4)
                 clear
-                echo > /etc/cron.d/tendang
+                echo > /etc/cron.d/unlock-blocked-users
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
-                echo -e "      AutoKill MultiLogin Turned Off  "
+                echo -e "      AutoUnlock MultiLogin Turned Off  "
                 echo -e ""
                 echo -e "======================================"
                 exit
