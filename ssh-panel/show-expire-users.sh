@@ -26,8 +26,8 @@ for((i=1; i<=$totalaccounts; i++ ))
        done
        bulantahun=`echo $tglexp |awk -F" " '{print $2,$6}'`
        echo "echo "VPS-Murah.net- User : $username Date Expired On : $tgl $bulantahun"" >> /usr/local/bin/alluser
-       todaystime=`date +%s`
-       if [ $userexpireinseconds -ge $todaystime ] ;
+       todaytwostime=`--date "2 day" +%s`
+       if [ $userexpireinseconds -ge $todaytwostime ] ;
            then
 			:
        else
