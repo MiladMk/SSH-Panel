@@ -196,6 +196,7 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendanga
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/unlock-blocked-users.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-unlock.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/show-expire-users.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/lock-expire-users.sh
 
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
@@ -227,6 +228,7 @@ mv tendangandlock /usr/bin/tendangandlock
 mv unlock-blocked-users.sh /usr/bin/unlock-blocked-users.sh
 mv auto-unlock.sh /etc/ssh-panel/auto-unlock.sh
 mv show-expire-users.sh /etc/ssh-panel/show-expire-users.sh
+mv show-expire-users.sh /etc/ssh-panel/lock-expire-users.sh
 
 mv reboot.sh /etc/ssh-panel/reboot.sh
 cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
@@ -236,37 +238,37 @@ mv clearlog.sh /etc/ssh-panel/clearlog.sh
 mv restore.sh /etc/ssh-panel/restore.sh
 mv menu /usr/local/bin/menu
 
-chmod +x /etc/ssh-panel/Banner.sh
-chmod +x /etc/ssh-panel/ChangePorts.sh
-chmod +x /etc/ssh-panel/ChangeUser.sh
-chmod +x /etc/ssh-panel/DelUser.sh
-chmod +x /etc/ssh-panel/ListUsers.sh
-chmod +x /etc/ssh-panel/RemoveScript.sh
-chmod +x /etc/ssh-panel/UserManager.sh
-chmod +x /etc/ssh-panel/auto-kill.sh
-chmod +x /etc/ssh-panel/auto-kill-lock.sh
-chmod +x /etc/ssh-panel/auto-reboot.sh
-chmod +x /etc/ssh-panel/bbr.sh
-chmod +x /etc/ssh-panel/ceklim.sh
-chmod +x /etc/ssh-panel/speedtest-cli
-chmod +x /etc/ssh-panel/user-delete-expired.sh
-chmod +x /etc/ssh-panel/user-extend.sh
-chmod +x /etc/ssh-panel/user-lock.sh
-chmod +x /etc/ssh-panel/user-unlock.sh
-chmod +x /etc/ssh-panel/usersOnline.sh
-chmod +x /etc/ssh-panel/auto-unlock.sh
-chmod +x /etc/ssh-panel/show-expire-users.sh
+chmod 700 /etc/ssh-panel/Banner.sh
+chmod 700 /etc/ssh-panel/ChangePorts.sh
+chmod 700 /etc/ssh-panel/ChangeUser.sh
+chmod 700 /etc/ssh-panel/DelUser.sh
+chmod 700 /etc/ssh-panel/ListUsers.sh
+chmod 700 /etc/ssh-panel/RemoveScript.sh
+chmod 700 /etc/ssh-panel/UserManager.sh
+chmod 700 /etc/ssh-panel/auto-kill.sh
+chmod 700 /etc/ssh-panel/auto-kill-lock.sh
+chmod 700 /etc/ssh-panel/auto-reboot.sh
+chmod 700 /etc/ssh-panel/bbr.sh
+chmod 700 /etc/ssh-panel/ceklim.sh
+chmod 700 /etc/ssh-panel/speedtest-cli
+chmod 700 /etc/ssh-panel/user-delete-expired.sh
+chmod 700 /etc/ssh-panel/user-extend.sh
+chmod 700 /etc/ssh-panel/user-lock.sh
+chmod 700 /etc/ssh-panel/user-unlock.sh
+chmod 700 /etc/ssh-panel/usersOnline.sh
+chmod 700 /etc/ssh-panel/auto-unlock.sh
+chmod 700 /etc/ssh-panel/show-expire-users.sh
 
-chmod +x /usr/bin/tendang
-chmod +x /usr/bin/tendangandlock
-chmod +x /usr/bin/unlock-blocked-users.sh
-chmod +x /etc/ssh-panel/reboot.sh
-chmod +x /etc/cron.d/reboot.sh
-chmod +x /etc/ssh-panel/rebootcmd.sh
-chmod +x /etc/ssh-panel/backup.sh
-chmod +x /etc/ssh-panel/clearlog.sh
-chmod +x /etc/ssh-panel/restore.sh
-chmod +x /usr/local/bin/menu
+chmod 700 /usr/bin/tendang
+chmod 700 /usr/bin/tendangandlock
+chmod 700 /usr/bin/unlock-blocked-users.sh
+chmod 700 /etc/ssh-panel/reboot.sh
+chmod 700 /etc/cron.d/reboot.sh
+chmod 700 /etc/ssh-panel/rebootcmd.sh
+chmod 700 /etc/ssh-panel/backup.sh
+chmod 700 /etc/ssh-panel/clearlog.sh
+chmod 700 /etc/ssh-panel/restore.sh
+chmod 700 /usr/local/bin/menu
 
 }
 fun_service_start()
