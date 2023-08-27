@@ -59,7 +59,7 @@ echo -e "  20)Restore Users"
 echo -e "  21)Clear log"
 echo -e "  22)Auto Kill And Lock Dupplicate Users"
 echo -e "  23)Auto Unlock Blocked Users"
-echo -e "  24)Show Expire Users"
+echo -e "  24)Show Expire And Expire Soon Users"
 
 echo -ne "${GREEN}\nSelect Operation : ${ENDCOLOR}" ;read n
 
