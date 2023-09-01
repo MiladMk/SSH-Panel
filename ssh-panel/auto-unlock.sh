@@ -86,7 +86,7 @@ case $AutoUnlock in
                 clear
                 echo > /etc/cron.d/unlock-blocked-users
                 echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
-                echo "*/15 * * * *  root /usr/bin/unlock-blocked-users" >>/etc/cron.d/unlock-blocked-users
+                echo "*/15 * * * *  root /usr/bin/unlock-blocked-users.sh" >>/etc/cron.d/unlock-blocked-users
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
