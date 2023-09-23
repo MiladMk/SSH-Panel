@@ -31,8 +31,13 @@ for((i=1; i<=$totalaccounts; i++ ))
        if [ $userexpireinseconds -ge $twoday ] ;
            then
 			:
-       else
-       echo "Username : $username already expired On Date: $tgl $bulantahun"
+       else 
+         status="$(passwd -S $username | awk '{print $2}' )"
+           if [[ "$status" = "L" ]]; then
+             echo "Username : $username already expired On Date: $tgl $bulantahun (LOCKED)"
+           else
+             echo "Username : $username already expired On Date: $tgl $bulantahun (UNLOCKED)"
+           fi
        fi
 done
 
