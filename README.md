@@ -3,5 +3,5 @@
 ### ★ Installation
 
 ``` 
- sudo wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh.sh && sudo chmod +x ssh.sh  && sudo ./ssh.sh 
+ sudo wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh.sh && sudo chmod 700 ssh.sh  && sudo ./ssh.sh 
  ```
