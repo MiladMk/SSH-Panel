@@ -28,8 +28,10 @@ echo -e "0. AutoUnlock After 1 Minutes"
 echo -e "1. AutoUnlock After 5 Minutes"
 echo -e "2. AutoUnlock After 10 Minutes"
 echo -e "3. AutoUnlock After 15 Minutes"
-echo -e "4. Turn Off AutoUnlock"
-echo -e "5. Exit"
+echo -e "4. AutoUnlock After 30 Minutes"
+echo -e "5. AutoUnlock After 60 Minutes"
+echo -e "6. Turn Off AutoUnlock"
+echo -e "7. Exit"
 echo -e "=================================="                                                                                                          
 echo -e ""
 read -p "Select From Options [1-4 or x] :  " AutoUnlock
@@ -96,6 +98,36 @@ case $AutoUnlock in
                 exit
                 ;;
                 4)
+                echo -e ""
+                sleep 1
+                clear
+                echo > /etc/cron.d/unlock-blocked-users
+                echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
+                echo "*/30 * * * *  root /usr/bin/unlock-blocked-users.sh" >>/etc/cron.d/unlock-blocked-users
+                echo -e ""
+                echo -e "======================================"
+                echo -e ""
+                echo -e "      AutoUnlock Every     : 30 Minutes"
+                echo -e ""
+                echo -e "======================================"
+                exit
+                ;;
+                5)
+                echo -e ""
+                sleep 1
+                clear
+                echo > /etc/cron.d/unlock-blocked-users
+                echo "# AutoUnlock" >>/etc/cron.d/unlock-blocked-users
+                echo "*/60 * * * *  root /usr/bin/unlock-blocked-users.sh" >>/etc/cron.d/unlock-blocked-users
+                echo -e ""
+                echo -e "======================================"
+                echo -e ""
+                echo -e "      AutoUnlock Every     : 60 Minutes"
+                echo -e ""
+                echo -e "======================================"
+                exit
+                ;;
+                6)
                 clear
                 echo > /etc/cron.d/unlock-blocked-users
                 echo -e ""
