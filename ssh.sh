@@ -197,6 +197,8 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/unlock-b
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-unlock.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/show-expire-users.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/lock-expire-users.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/auto-backup-send-email.sh
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/tendangandautomail
 
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/reboot.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/rebootcmd.sh
@@ -229,6 +231,8 @@ mv unlock-blocked-users.sh /usr/bin/unlock-blocked-users.sh
 mv auto-unlock.sh /etc/ssh-panel/auto-unlock.sh
 mv show-expire-users.sh /etc/ssh-panel/show-expire-users.sh
 mv lock-expire-users.sh /etc/ssh-panel/lock-expire-users.sh
+mv auto-backup-send-email.sh /etc/ssh-panel/auto-backup-send-email.sh
+mv tendangandautomail /usr/bin/tendangandautomail
 
 mv reboot.sh /etc/ssh-panel/reboot.sh
 cp /etc/ssh-panel/reboot.sh /etc/cron.d/reboot.sh
@@ -259,6 +263,8 @@ chmod 700 /etc/ssh-panel/usersOnline.sh
 chmod 700 /etc/ssh-panel/auto-unlock.sh
 chmod 700 /etc/ssh-panel/show-expire-users.sh
 chmod 700 /etc/ssh-panel/lock-expire-users.sh
+chmod 700 /etc/ssh-panel/auto-backup-send-email.sh
+chmod 700 /usr/bin/tendangandautomail
 
 chmod 700 /usr/bin/tendang
 chmod 700 /usr/bin/tendangandlock
