@@ -28,15 +28,15 @@ cp /etc/group tmp_backup_$now/
 cp /etc/shadow tmp_backup_$now/
 cp /etc/gshadow tmp_backup_$now/
 cd /root
-zip -r mc4_backup_$now.zip /root/tmp_backup_$now 
+zip -r server_backup_$now.zip /root/tmp_backup_$now 
 sleep 1
 rm -rf /root/tmp_backup_$now
-echo "Backup File $now." | mutt -a "/root/mc4_backup_$now.zip" -s "Backup File $now" -- $EMAIL
+echo "Backup File $now." | mutt -a "/root/server_backup_$now.zip" -s "Backup File $now" -- $EMAIL
 echo -e "
 Detail Backup 
 ==================================
 IP VPS        : $IP
-Directory     : /root/mc4_backup_$now.zip
+Directory     : /root/server_backup_$now.zip
 Email         : $EMAIL
 Date          : $date
 ==================================
