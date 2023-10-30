@@ -61,6 +61,7 @@ echo -e "  22)Auto Kill And Lock Dupplicate Users"
 echo -e "  23)Auto Unlock Blocked Users"
 echo -e "  24)Show Expire And Expire Soon Users"
 echo -e "  25)Lock Expire Users"
+echo -e "  26)Auto Backup Send To Email"
 
 echo -ne "${GREEN}\nSelect Operation : ${ENDCOLOR}" ;read n
 
@@ -91,5 +92,6 @@ case $n in
   23) /etc/ssh-panel/auto-unlock.sh;;
   24) /etc/ssh-panel/show-expire-users.sh;;
   25) /etc/ssh-panel/lock-expire-users.sh;;
+  26) /etc/ssh-panel/auto-backup-send-email.sh;;
   *) echo -e "${RED}\nInvalid Option. Press Enter to return back to the menu${ENDCOLOR}";read && menu;;
 esac
