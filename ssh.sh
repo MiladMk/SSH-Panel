@@ -207,6 +207,11 @@ wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/clearlog
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/restore.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/menu
 
+wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/DNSUpdater/update_dns_ip.sh
+wget https://github.com/MiladMk/SSH-Panel/raw/main/DNSUpdater/index_current_server.txt
+wget https://github.com/MiladMk/SSH-Panel/raw/main/DNSUpdater/ip.txt
+wget https://github.com/MiladMk/SSH-Panel/raw/main/DNSUpdater/ip_log.txt
+
 mv Banner.sh /etc/ssh-panel/Banner.sh
 mv ChangePorts.sh /etc/ssh-panel/ChangePorts.sh
 mv ChangeUser.sh /etc/ssh-panel/ChangeUser.sh
@@ -242,6 +247,11 @@ mv clearlog.sh /etc/ssh-panel/clearlog.sh
 mv restore.sh /etc/ssh-panel/restore.sh
 mv menu /usr/local/bin/menu
 
+mv update_dns_ip.sh /etc/DNSUpdater/update_dns_ip.sh
+mv index_current_server.txt /etc/DNSUpdater/index_current_server.txt
+mv ip.txt /etc/DNSUpdater/ip.txt
+mv ip_log.txt /etc/DNSUpdater/ip_log.txt
+
 chmod 700 /etc/ssh-panel/Banner.sh
 chmod 700 /etc/ssh-panel/ChangePorts.sh
 chmod 700 /etc/ssh-panel/ChangeUser.sh
@@ -276,6 +286,8 @@ chmod 700 /etc/ssh-panel/backup.sh
 chmod 700 /etc/ssh-panel/clearlog.sh
 chmod 700 /etc/ssh-panel/restore.sh
 chmod 700 /usr/local/bin/menu
+
+chmod 700 /etc/DNSUpdater/update_dns_ip.sh
 
 }
 fun_service_start()
