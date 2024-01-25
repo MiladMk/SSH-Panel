@@ -173,6 +173,7 @@ EOF
 fun_panel()
 {
 mkdir /etc/ssh-panel
+mkdir /etc/DNSUpdater
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/Banner.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/ChangePorts.sh
 wget https://raw.githubusercontent.com/MiladMk/SSH-Panel/main/ssh-panel/ChangeUser.sh
