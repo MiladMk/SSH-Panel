@@ -41,7 +41,7 @@ pre_req()
 {
         #installing pre-requirements and adding port rules to ubuntu firewall
 		
-	apt update -y && apt upgrade -y
+	#apt update -y && apt upgrade -y
 
         apt-get install -y dropbear && apt-get install -y stunnel4 && apt-get install -y squid && apt-get install -y cmake && apt-get install -y python3 && apt-get install -y screenfetch && apt-get install -y openssl && apt-get install -y zip && apt-get install -y git && apt-get install -y mutt
         ufw allow 443/tcp
