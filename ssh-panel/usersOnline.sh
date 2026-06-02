@@ -4,64 +4,79 @@ clear
 
 echo " "
 echo " "
-echo "===========================================";
+echo "=====================================================";
 echo " "
 echo " "
 
-if [ -e "/var/log/auth.log" ]; then
-        LOG="/var/log/auth.log";
-fi
-if [ -e "/var/log/secure" ]; then
-        LOG="/var/log/secure";
-fi
-		
-data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-echo "-----=[ Dropbear User Login ]=-----";
-echo "ID  |  Username  |  IP Address";
-echo "-------------------------------------";
-cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/login-db.txt;
-for PID in "${data[@]}"
-do
-        cat /tmp/login-db.txt | grep "dropbear\[$PID\]" > /tmp/login-db-pid.txt;
-        NUM=`cat /tmp/login-db-pid.txt | wc -l`;
-        USER=`cat /tmp/login-db-pid.txt | awk '{print $10}'`;
-        IP=`cat /tmp/login-db-pid.txt | awk '{print $12}'`;
-        if [ $NUM -eq 1 ]; then
-                echo "$PID - $USER - $IP";
-		fi
-done
-echo " "
-echo "-----=[ OpenSSH User Login ]=-----";
-echo "ID  |  Username  |  IP Address";
-echo "-------------------------------------";
-cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/login-db.txt
-data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
+# ----------------=[ Dropbear User Login ]=----------------
+echo "-----=[ Dropbear User Login ]=-----"
+echo "PID   |   Username   |   IP Address"
+echo "-------------------------------------"
 
-for PID in "${data[@]}"
-do
-        cat /tmp/login-db.txt | grep "sshd\[$PID\]" > /tmp/login-db-pid.txt;
-        NUM=`cat /tmp/login-db-pid.txt | wc -l`;
-        USER=`cat /tmp/login-db-pid.txt | awk '{print $9}'`;
-        IP=`cat /tmp/login-db-pid.txt | awk '{print $11}'`;
-        if [ $NUM -eq 1 ]; then
-                echo "$PID - $USER - $IP";
+# پیدا کردن تمام PIDهای پروسه dropbear
+all_dropbear_pids=$(ps -C dropbear -o pid=)
+
+for PID in $all_dropbear_pids; do
+    # پیدا کردن PID والد. پروسه اصلی سیستم والدش شماره 1 (systemd) است.
+    # پروسه‌های کاربران آنلاین، والدشان پروسه اصلی dropbear است (بزرگتر از 1).
+    PPID_NUM=$(ps -o ppid= -p $PID | tr -d ' ')
+    
+    if [ ! -z "$PPID_NUM" ] && [ "$PPID_NUM" -gt 1 ]; then
+        # استخراج لاگ اتصال از journalctl برای این PID خاص
+        LOG_LINE=$(journalctl _PID=$PID --no-pager 2>/dev/null | grep -i "Password auth succeeded" | tail -n 1)
+        
+        if [ ! -z "$LOG_LINE" ]; then
+            USER=$(echo "$LOG_LINE" | awk -F"for '" '{print $2}' | cut -d"'" -f1)
+            IP=$(echo "$LOG_LINE" | awk -F"from " '{print $2}' | cut -d":" -f1)
+            
+            if [ ! -z "$USER" ] && [ "$USER" != "root" ]; then
+                echo "$PID  -  $USER  -  $IP"
+            fi
         fi
+    fi
 done
+
+echo " "
+# ----------------=[ OpenSSH User Login ]=----------------
+echo "-----=[ OpenSSH User Login ]=-----"
+echo "PID   |   Username   |   IP Address"
+echo "-------------------------------------"
+
+# پیدا کردن پروسه‌های فرزند SSH (کاربران آنلاین)
+ssh_pids=$(ps aux | grep "sshd" | grep -v -E "grep|sshd -D" | awk '{print $2}')
+
+for PID in $ssh_pids; do
+    USER=$(ps -o user= -p $PID)
+    
+    if [ ! -z "$USER" ] && [ "$USER" != "root" ] && [ "$USER" != "sshd" ] && [ "$USER" != "reboot" ]; then
+        # پیدا کردن IP با دستور ss (بدون سوئیچ‌های ناسازگار)
+        IP=$(ss -tnpi 2>/dev/null | grep "pid=$PID," | awk '{print $5}' | cut -d: -f1 | sed -e 's/\[//g' -e 's/\]//g' | head -n 1)
+        if [ -z "$IP" ]; then IP="Unknown"; fi
+        echo "$PID  -  $USER  -  $IP"
+    fi
+done
+
+echo " "
+# ----------------=[ OpenVPN User Login ]=----------------
 if [ -f "/etc/openvpn/openvpn-status.log" ]; then
-	line=`cat /etc/openvpn/openvpn-status.log | wc -l`
-	a=$((3+((line-8)/2)))
-	b=$(((line-8)/2))
-	echo " "
-	echo "-----=[ OpenVPN User Login ]=-----";
-	echo "Username  |  IP Address  |  Connected Since";
-	echo "-------------------------------------";
-	cat /etc/openvpn/openvpn-status.log | head -n $a | tail -n $b | cut -d "," -f 1,2,5 | sed -e 's/,/   /g' > /tmp/vpn-login-db.txt
-	cat /tmp/vpn-login-db.txt
+    echo "-----=[ OpenVPN User Login ]=-----"
+    echo "Username   |   IP Address   |   Connected Since"
+    echo "-------------------------------------"
+    
+    sed -n '/Common Name,Real Address/,/ROUTING TABLE/p' /etc/openvpn/openvpn-status.log | grep -v -E "Common Name,Real Address|ROUTING TABLE" | while read -r line
+    do
+        if [ ! -z "$line" ]; then
+            USER=$(echo "$line" | cut -d',' -f1)
+            IP=$(echo "$line" | cut -d',' -f2 | cut -d':' -f1)
+            SINCE=$(echo "$line" | cut -d',' -f5)
+            echo "$USER  -  $IP  -  $SINCE"
+        fi
+    done
 fi
 
 echo " "
 echo " "
-echo "===========================================";
+echo "=====================================================";
 echo " ";
 echo " ";
 
