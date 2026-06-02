@@ -1,97 +1,80 @@
 #!/bin/bash
-# Script by : Akbar Maulana
-#!/bin/bash
+# Optimized for Ubuntu 24.04 — Multi-Port Support
 clear
+
+# حد مجاز پیش‌فرض تعداد اتصالات (کانکشن) برای هر کاربر
 MAX=1
-if [ -e "/var/log/auth.log" ]; then
-        OS=1;
-        LOG="/var/log/auth.log";
-fi
-if [ -e "/var/log/secure" ]; then
-        OS=2;
-        LOG="/var/log/secure";
-fi
 
-if [ $OS -eq 1 ]; then
-	service ssh restart > /dev/null 2>&1;
-fi
-if [ $OS -eq 2 ]; then
-	service sshd restart > /dev/null 2>&1;
-fi
-	service dropbear restart > /dev/null 2>&1;
-				
+# اگر مقداری به عنوان آرگومان به اسکریپت پاس داده شود، آن را به عنوان MAX در نظر می‌گیرد
 if [[ ${1+x} ]]; then
-        MAX=$1;
+        MAX=$1
 fi
 
-        cat /etc/passwd | grep "/home/" | cut -d":" -f1 > /root/user.txt
-        username1=( `cat "/root/user.txt" `);
-        i="0";
-        for user in "${username1[@]}"
-			do
-                username[$i]=`echo $user | sed 's/'\''//g'`;
-                jumlah[$i]=0;
-                i=$i+1;
-			done
-        cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/log-db.txt
-        proc=( `ps aux | grep -i dropbear | awk '{print $2}'`);
-        for PID in "${proc[@]}"
-			do
-                cat /tmp/log-db.txt | grep "dropbear\[$PID\]" > /tmp/log-db-pid.txt
-                NUM=`cat /tmp/log-db-pid.txt | wc -l`;
-                USER=`cat /tmp/log-db-pid.txt | awk '{print $10}' | sed 's/'\''//g'`;
-                IP=`cat /tmp/log-db-pid.txt | awk '{print $12}'`;
-                if [ $NUM -eq 1 ]; then
-                        i=0;
-                        for user1 in "${username[@]}"
-							do
-                                if [ "$USER" == "$user1" ]; then
-                                        jumlah[$i]=`expr ${jumlah[$i]} + 1`;
-                                        pid[$i]="${pid[$i]} $PID"
-                                fi
-                                i=$i+1;
-							done
-                fi
-			done
-        cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/log-db.txt
-        data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
-        for PID in "${data[@]}"
-			do
-                cat /tmp/log-db.txt | grep "sshd\[$PID\]" > /tmp/log-db-pid.txt;
-                NUM=`cat /tmp/log-db-pid.txt | wc -l`;
-                USER=`cat /tmp/log-db-pid.txt | awk '{print $9}'`;
-                IP=`cat /tmp/log-db-pid.txt | awk '{print $11}'`;
-                if [ $NUM -eq 1 ]; then
-                        i=0;
-                        for user1 in "${username[@]}"
-							do
-                                if [ "$USER" == "$user1" ]; then
-                                        jumlah[$i]=`expr ${jumlah[$i]} + 1`;
-                                        pid[$i]="${pid[$i]} $PID"
-                                fi
-                                i=$i+1;
-							done
-                fi
-        done
-        j="0";
-        for i in ${!username[*]}
-			do
-                if [ ${jumlah[$i]} -gt $MAX ]; then
-                        date=`date +"%Y-%m-%d %X"`;
-                        echo "$date - ${username[$i]} - ${jumlah[$i]}";
-                        echo "$date - ${username[$i]} - ${jumlah[$i]}" >> /root/log-limit.txt;
-                        kill ${pid[$i]};
-                        pid[$i]="";
-                        j=`expr $j + 1`;
-                fi
-			done
-        if [ $j -gt 0 ]; then
-                if [ $OS -eq 1 ]; then
-                        service ssh restart > /dev/null 2>&1;
-                fi
-                if [ $OS -eq 2 ]; then
-                        service sshd restart > /dev/null 2>&1;
-                fi
-                service dropbear restart > /dev/null 2>&1;
-                j=0;
-		fi
+# آرایه‌ای برای ذخیره تعداد اتصالات و PIDهای هر کاربر
+declare -A user_connections
+declare -A user_pids
+
+# ۱. جمع‌آوری اطلاعات کاربران آنلاین Dropbear (مستقل از پورت)
+# پیدا کردن تمامی PIDهای فعال سرویس dropbear
+all_dropbear_pids=$(ps -C dropbear -o pid=)
+
+for PID in $all_dropbear_pids; do
+    # بررسی سلسله‌مراتب پروسه‌ها (پروسه فرزند والدش بزرگتر از ۱ است)
+    PPID_NUM=$(ps -o ppid= -p $PID | tr -d ' ')
+    
+    if [ ! -z "$PPID_NUM" ] && [ "$PPID_NUM" -gt 1 ]; then
+        # استخراج نام کاربری واقعی از Journal سیستم بدون نیاز به auth.log
+        LOG_LINE=$(journalctl _PID=$PID --no-pager 2>/dev/null | grep -i "Password auth succeeded" | tail -n 1)
+        
+        if [ ! -z "$LOG_LINE" ]; then
+            USER=$(echo "$LOG_LINE" | awk -F"for '" '{print $2}' | cut -d"'" -f1)
+            
+            if [ ! -z "$USER" ] && [ "$USER" != "root" ]; then
+                # شمارش کانکشن‌ها و ذخیره PIDها برای این کاربر
+                user_connections["$USER"]=$(( ${user_connections["$USER"]:-0} + 1 ))
+                user_pids["$USER"]="${user_pids["$USER"]} $PID"
+            fi
+        fi
+    fi
+done
+
+# ۲. جمع‌آوری اطلاعات کاربران آنلاین OpenSSH (مستقل از پورت)
+# پیدا کردن پروسه‌های فرزند SSH بدون نیاز به تگ [priv] یا وابستگی به لاگ
+ssh_pids=$(ps aux | grep "sshd" | grep -v -E "grep|sshd -D" | awk '{print $2}')
+
+for PID in $ssh_pids; do
+    USER=$(ps -o user= -p $PID)
+    
+    if [ ! -z "$USER" ] && [ "$USER" != "root" ] && [ "$USER" != "sshd" ] && [ "$USER" != "reboot" ]; then
+        # شمارش کانکشن‌ها و ذخیره PIDها برای این کاربر
+        user_connections["$USER"]=$(( ${user_connections["$USER"]:-0} + 1 ))
+        user_pids["$USER"]="${user_pids["$USER"]} $PID"
+    fi
+done
+
+# ۳. بررسی تخلفات و اعمال محدودیت (Kill متخلفین)
+KILLED_COUNT=0
+
+for USER in "${!user_connections[@]}"; do
+    COUNT=${user_connections["$USER"]}
+    
+    # اگر تعداد اتصالات کاربر روی تمام پورت‌ها بیشتر از حد مجاز بود
+    if [ $COUNT -gt $MAX ]; then
+        CURRENT_DATE=$(date +"%Y-%m-%d %X")
+        
+        # نمایش اطلاعات کاربر متخلف در خروجی و ذخیره در فایل لاگ پروژه
+        echo "$CURRENT_DATE - User: $USER has $COUNT connections (Max allowed: $MAX). Killing..."
+        echo "$CURRENT_DATE - $USER - $COUNT" >> /root/log-limit.txt
+        
+        # قطع کردن تمام اتصالات این کاربر متخلف به صورت یکجا
+        kill ${user_pids["$USER"]} 2>/dev/null
+        KILLED_COUNT=$((KILLED_COUNT + 1))
+    fi
+done
+
+# اگر کاربری ریستکت و قطع اتصال شد، برای پایداری بهتر نیازی به ریست کل سرویس نیست،
+# اما ساختار قدیمی شما را برای هماهنگی با پنل حفظ کردیم.
+if [ $KILLED_COUNT -gt 0 ]; then
+    systemctl restart ssh 2>/dev/null || systemctl restart sshd 2>/dev/null
+    systemctl restart dropbear 2>/dev/null
+fi
