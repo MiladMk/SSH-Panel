@@ -97,4 +97,5 @@ fi
 rm -f "$TMP_FILE"
 echo -e "\e[34m===================================================================================\e[0m"
 
+echo -e "\nPress Enter key to return to main menu";read
 menu
